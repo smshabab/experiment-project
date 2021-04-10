@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
  
 
 const validate = values => {
+    
     const errors = {};
     if (!values.firstName) {
         errors.firstName = 'Required';
@@ -22,6 +23,12 @@ const validate = values => {
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
         errors.email = 'Invalid email address';
     }
+
+    if (!values.password) {
+        errors.password = 'Required';
+    } else if (values.password.length > 20) {
+        errors.password = 'Must be 20 characters or less';
+    }
     
     return errors;
 };
@@ -33,6 +40,7 @@ const validate = values => {
         firstName: '',
         lastName: '',
         email: '',
+        password: '',
         },
         validate,
         onSubmit: values => {
@@ -43,10 +51,15 @@ const validate = values => {
     <Container>
         <form onSubmit={formik.handleSubmit}>
             <Row>
-                <Col lg={2}>
+                <Col>
+                    USER REGISTRATION
+                </Col>
+            </Row>
+            <Row>
+                <Col>
                     <label htmlFor="firstName">First Name</label>
                 </Col>
-                <Col lg={4}>
+                <Col>
                     <input
                         id="firstName"
                         name="firstName"
@@ -54,6 +67,8 @@ const validate = values => {
                         onChange={formik.handleChange}
                         value={formik.values.firstName}
                     />
+                </Col>
+                <Col>
                     {formik.errors.firstName ? <div>{formik.errors.firstName}</div> : null}
                 </Col>
             </Row>
@@ -69,6 +84,8 @@ const validate = values => {
                         onChange={formik.handleChange}
                         value={formik.values.lastName}
                     />
+                </Col>
+                <Col>
                     {formik.errors.lastName ? <div>{formik.errors.lastName}</div> : null}
                 </Col>
             </Row>
@@ -84,10 +101,32 @@ const validate = values => {
                         onChange={formik.handleChange}
                         value={formik.values.email}
                     />
+                </Col>
+                <Col>
                     {formik.errors.email ? <div>{formik.errors.email}</div> : null}
                 </Col>
             </Row>
             <Row>
+                <Col>
+                    <label htmlFor="password">Password</label>
+                </Col>
+                <Col>
+                    <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
+                    />
+                </Col>
+                <Col>
+                    {formik.errors.password ? <div>{formik.errors.password}</div> : null}
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                
+                </Col>
                 <Col>
                 
                 </Col>
