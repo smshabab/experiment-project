@@ -7,8 +7,9 @@ const initialState = {
 
 
 const rootReducer = (state = initialState, action) => {
+
     if(action.type === 'SUBMIT_ON_REGISTRATION'){
-        console.log("Redux is working perfectly!");
+
         axios.get('https://dummy-data-99218-default-rtdb.firebaseio.com/user-info.json')
             .then(response=>{
                 let fetctRows = [];
@@ -19,31 +20,36 @@ const rootReducer = (state = initialState, action) => {
                         id: key
                     })
                 }
-                for(let i=0; i<fetctRows.length(); i++){
-                    console.log(fetctRows[i]);
+                for(let i=0; i<fetctRows.length; i++){
+                    console.log();
+                    if(fetctRows[i].email === action.payload.email){
+                        checkEmail = false;
+                    }
                 }
                 if(checkEmail){
-                    console.log("New Email");
+                    axios.post('https://dummy-data-99218-default-rtdb.firebaseio.com/user-info.json', action.payload)
+                        .then(response=>{
+                            return {
+                                ...state,
+                                isRegistered: true
+                            };
+                        
+                        })
+                        .catch(error=>{
+                            console.log("Data Upload Error"+error);
+                        });
                 }else{
-                    console.log("Old Email");
+                    console.log("Email already exsists.");
                 }
                 
             })
             .catch(error=>{
                 console.log("error"+error);
             });
-        // axios.post('https://dummy-data-99218-default-rtdb.firebaseio.com/user-info.json', action.payload)
-        //     .then(response=>{
-        //         return {
-        //             ...state,
-        //             isRegistered: true
-        //         };
-               
-        //     })
-        //     .catch(error=>{
-        //         console.log("Data Upload Error"+error);
-        //     });
         
+        
+    }else if(action.type === 'SUBMIT_ON_LOGIN'){
+        console.log("Login Working");
     }
     return state;
 };

@@ -2,8 +2,11 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Formik } from 'formik';
 import './userLogin.css';
+import {connect} from 'react-redux';
 
-const userLogin = () => {
+let payload = {};
+
+const userLogin = (props) => {
     return(
         <Container fluid >
             <Row>
@@ -30,10 +33,10 @@ const userLogin = () => {
                     return errors;
                 }}
                 onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 400);
+                    payload = values;
+                    if(payload.email !== '' && payload.password !== ''){
+                        props.onSubmit(payload);
+                    }
                 }}
             >
                 {({
@@ -95,4 +98,17 @@ const userLogin = () => {
     );
 };
 
-export default userLogin;
+
+const mapStateToProps = state => {
+    return {
+
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onSubmit: (payload) => dispatch({type:'SUBMIT_ON_LOGIN', payload})
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(userLogin);
