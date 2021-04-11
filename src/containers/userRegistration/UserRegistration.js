@@ -33,8 +33,10 @@ const validate = values => {
     
     return errors;
 };
+
+let payload = {};
  
- const UserRegistration = (props) => {
+const UserRegistration = (props) => {
     
     const formik = useFormik({
         initialValues: {
@@ -45,9 +47,13 @@ const validate = values => {
         },
         validate,
         onSubmit: values => {
-        alert(JSON.stringify(values, null, 2));
+            payload = values;
+            if(payload.firstName !== '' && payload.lastName !== '' && payload.email !== '' && payload.password !== ''){
+                props.onSubmit(payload);
+            }
         },
     });
+ 
    return (
     <Container>
         <form onSubmit={formik.handleSubmit}>
@@ -132,7 +138,7 @@ const validate = values => {
                 
                 </Col>
                 <Col>
-                    <button type="submit" onClick={props.onSubmit}>Submit</button>
+                    <button type="submit">Submit</button>
                 </Col>
             </Row>
             
@@ -149,15 +155,17 @@ const validate = values => {
    );
  };
 
+
+
  const mapStateToProps = state => {
     return {
-        ctr: state.counter
+        isReg: state.isRegistered
     };
  };
 
  const mapDispatchToProps = dispatch => {
     return {
-        onSubmit: () => dispatch({type:'SUBMIT_ON_REGISTRATION'})
+        onSubmit: (payload) => dispatch({type:'SUBMIT_ON_REGISTRATION', payload})
     };
 };
 
