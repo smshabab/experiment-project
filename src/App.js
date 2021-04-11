@@ -1,11 +1,12 @@
 import './App.css';
-import UserLogin from './components/userLogin/userLogin';
-import UserRegistration from './components/userRegistration/UserRegistration';
+import UserLogin from './containers/userLogin/userLogin';
+import UserRegistration from './containers/userRegistration/UserRegistration';
 
 function App() {
   return (
     <div className="App">
       <UserLogin/>
+      <br/><br/><br/><br/>
       <UserRegistration/>
     </div>
   );

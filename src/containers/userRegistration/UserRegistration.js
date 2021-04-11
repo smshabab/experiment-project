@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { Container, Row, Col } from 'react-bootstrap';
+import {connect} from 'react-redux';
  
 
 const validate = values => {
@@ -33,7 +34,7 @@ const validate = values => {
     return errors;
 };
  
- const UserRegistration = () => {
+ const UserRegistration = (props) => {
     
     const formik = useFormik({
         initialValues: {
@@ -131,7 +132,7 @@ const validate = values => {
                 
                 </Col>
                 <Col>
-                    <button type="submit">Submit</button>
+                    <button type="submit" onClick={props.onSubmit}>Submit</button>
                 </Col>
             </Row>
             
@@ -148,4 +149,17 @@ const validate = values => {
    );
  };
 
- export default UserRegistration;
+ const mapStateToProps = state => {
+    return {
+        ctr: state.counter
+    };
+ };
+
+ const mapDispatchToProps = dispatch => {
+    return {
+        onSubmit: () => dispatch({type:'SUBMIT_ON_REGISTRATION'})
+    };
+};
+
+
+ export default connect(mapStateToProps, mapDispatchToProps)(UserRegistration);
