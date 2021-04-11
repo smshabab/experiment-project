@@ -33,6 +33,7 @@ const userLogin = (props) => {
                     return errors;
                 }}
                 onSubmit={(values, { setSubmitting }) => {
+                    setSubmitting(false);
                     payload = values;
                     if(payload.email !== '' && payload.password !== ''){
                         props.onSubmit(payload);

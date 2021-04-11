@@ -50,6 +50,35 @@ const rootReducer = (state = initialState, action) => {
         
     }else if(action.type === 'SUBMIT_ON_LOGIN'){
         console.log("Login Working");
+        axios.get('https://dummy-data-99218-default-rtdb.firebaseio.com/user-info.json')
+            .then(response=>{
+                let fetctRows = [];
+                let varifyUser = false;
+                for(let key in response.data){
+                    fetctRows.push({
+                        ...response.data[key],
+                        id: key
+                    })
+                }
+                for(let i=0; i<fetctRows.length; i++){
+                    console.log();
+                    if(fetctRows[i].email === action.payload.email && fetctRows[i].password === action.payload.password){
+                        varifyUser = true;
+                    }
+                }
+                if(varifyUser){
+                    console.log("User can login");
+                    return{
+                        ...state,
+                        logged: true
+                    };
+                }else{
+                    console.log("Wrong email or password");
+                }
+            })
+            .catch(error=>{
+                console.log("error"+error);
+            });
     }
     return state;
 };
