@@ -2,6 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import { Container, Row, Col } from 'react-bootstrap';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
  
 
 const validate = values => {
@@ -60,7 +61,7 @@ const UserRegistration = (props) => {
             <Row>
                 <Col>
                     USER REGISTRATION
-                </Col>
+                </Col><br/>
             </Row>
             <Row>
                 <Col>
@@ -132,13 +133,12 @@ const UserRegistration = (props) => {
             </Row>
             <Row>
                 <Col>
-                
-                </Col>
-                <Col>
-                
-                </Col>
-                <Col>
                     <button type="submit">Submit</button>
+                </Col><br/>
+            </Row>
+            <Row>
+                <Col>
+                    <Link to="/login">Already have a account?</Link>
                 </Col>
             </Row>
             

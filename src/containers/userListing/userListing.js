@@ -1,10 +1,15 @@
 import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 
-const userListing = () => {
+const userListing = (props) => {
     return(
-        <div>
-            user listing
-        </div>
+        <Container>
+            <Row>
+                <Col>
+
+                </Col>
+            </Row>
+        </Container>
     );
 };
 

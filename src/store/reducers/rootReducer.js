@@ -5,7 +5,8 @@ const initialState = {
     isRegistered: false,
     displayDetails: false,
     displayListing: false,
-    userEmail: ''
+    userEmail: '',
+    userDetailsPayload: {}
 };
 
 
@@ -52,7 +53,6 @@ const rootReducer = (state = initialState, action) => {
         
         
     }else if(action.type === 'SUBMIT_ON_LOGIN'){
-        console.log("Login Working");
         axios.get('https://dummy-data-99218-default-rtdb.firebaseio.com/user-info.json')
             .then(response=>{
                 let fetctRows = [];
@@ -76,7 +76,13 @@ const rootReducer = (state = initialState, action) => {
                     return{
                         ...state,
                         logged: true,
-                        userEmail: fetctRows[userIndex].email
+                        userEmail: fetctRows[userIndex].email,
+                        userDetailsPayload:{
+                            firstName: fetctRows[userIndex].firstName,
+                            lastName: fetctRows[userIndex].lastName,
+                            email: fetctRows[userIndex].email,
+                            password: fetctRows[userIndex].password
+                        }
                     };
                 }else{
                     console.log("Wrong email or password");

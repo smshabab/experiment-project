@@ -1,20 +1,23 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Formik } from 'formik';
-import './userLogin.css';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 
 let payload = {};
 
 const userLogin = (props) => {
-    
+    if(props.logged===true){
+        console.log("Logged: True");
+    }else{
+        console.log("Logged: False");
+    }
     return(
         
         (props.logged)?<Redirect to="/layout"/>:
         <Container fluid >
             <Row>
-                <Col lg={4} className="containerDiv"><p>USER LOGIN</p></Col>
+                <Col lg={4} className="containerDiv"><p>USER LOGIN</p><br/></Col>
             </Row>
             <Formik
                 initialValues={{ email: '', password: '' }}
@@ -91,9 +94,14 @@ const userLogin = (props) => {
                         </Col>
                     </Row>
                     <Row>
-                        <button type="submit" disabled={isSubmitting}>
-                        Submit
-                        </button>
+                        <Col>
+                            <button type="submit" disabled={isSubmitting}>Submit</button>
+                        </Col><br/>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Link to="/registration">Don't have a account?</Link>
+                        </Col>
                     </Row>
                     
                 </form>
