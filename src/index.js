@@ -8,6 +8,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import {Provider} from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import {watchAuth} from './store/sagas/index';
+import {BrowserRouter} from 'react-router-dom';
 
 const composeEnhancers = process.env.NODE_ENV=== 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 const sagaMiddleware = createSagaMiddleware();
@@ -21,9 +22,11 @@ sagaMiddleware.run(watchAuth);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

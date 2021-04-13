@@ -4,7 +4,8 @@ const initialState = {
     logged: false,
     isRegistered: false,
     displayDetails: false,
-    displayListing: false
+    displayListing: false,
+    userEmail: ''
 };
 
 
@@ -56,6 +57,7 @@ const rootReducer = (state = initialState, action) => {
             .then(response=>{
                 let fetctRows = [];
                 let varifyUser = false;
+                let userIndex;
                 for(let key in response.data){
                     fetctRows.push({
                         ...response.data[key],
@@ -66,13 +68,15 @@ const rootReducer = (state = initialState, action) => {
                     console.log();
                     if(fetctRows[i].email === action.payload.email && fetctRows[i].password === action.payload.password){
                         varifyUser = true;
+                        userIndex = i;
                     }
                 }
                 if(varifyUser){
                     console.log("User can login");
                     return{
                         ...state,
-                        logged: true
+                        logged: true,
+                        userEmail: fetctRows[userIndex].email
                     };
                 }else{
                     console.log("Wrong email or password");

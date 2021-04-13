@@ -1,10 +1,15 @@
 import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 
 const userDetails = () => {
     return(
-        <div>
-            user details
-        </div>
+        <Container>
+            <Row>
+                <Col>
+
+                </Col>
+            </Row>
+        </Container>
     );
 };
 

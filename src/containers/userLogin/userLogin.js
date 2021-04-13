@@ -3,11 +3,15 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Formik } from 'formik';
 import './userLogin.css';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 let payload = {};
 
 const userLogin = (props) => {
+    
     return(
+        
+        (props.logged)?<Redirect to="/layout"/>:
         <Container fluid >
             <Row>
                 <Col lg={4} className="containerDiv"><p>USER LOGIN</p></Col>
@@ -95,11 +99,17 @@ const userLogin = (props) => {
                 </form>
                 )}
             </Formik>
+            
         </Container>
+        
     );
 };
 
-
+const mapStateToProps = state => {
+   return{
+        logged: state.logged
+   };
+};
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -107,4 +117,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(userLogin);
+export default connect(mapStateToProps, mapDispatchToProps)(userLogin);
