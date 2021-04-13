@@ -142,13 +142,6 @@ const UserRegistration = (props) => {
                 </Col>
             </Row>
             
-    
-            
-            
-    
-            
-    
-            
         </form>
     </Container>
     

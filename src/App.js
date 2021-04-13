@@ -6,8 +6,6 @@ import Login from './containers/userLogin/userLogin';
 import Registration from './containers/userRegistration/UserRegistration';
 
 
-
-
 function App(props) {
   let routes = (
     <Switch>

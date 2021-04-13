@@ -8,11 +8,11 @@ const layout = (props) => {
     return(
         <Container>
             <Row>
-                <Col>HOME PAGE</Col>
+                <Col>HOME PAGE</Col><br/>
             </Row>
             <Row>
                 <Col><Button onClick={props.displayDetails}>My Details</Button></Col>
-                <Col><Button onClick={props.displayAllUsers}>All Users</Button></Col>
+                <Col><Button onClick={props.displayAllUsers}>All Users</Button></Col><br/>
             </Row>
             <Row>
                 <Col>

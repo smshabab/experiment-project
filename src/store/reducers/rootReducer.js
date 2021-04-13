@@ -6,7 +6,8 @@ const initialState = {
     displayDetails: false,
     displayListing: false,
     userEmail: '',
-    userDetailsPayload: {}
+    userDetailsPayload: {},
+    userListingPayload: []
 };
 
 
@@ -82,7 +83,8 @@ const rootReducer = (state = initialState, action) => {
                             lastName: fetctRows[userIndex].lastName,
                             email: fetctRows[userIndex].email,
                             password: fetctRows[userIndex].password
-                        }
+                        },
+                        userListingPayload: fetctRows
                     };
                 }else{
                     console.log("Wrong email or password");
