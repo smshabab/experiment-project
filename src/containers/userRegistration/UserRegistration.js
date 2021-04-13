@@ -132,6 +132,7 @@ const UserRegistration = (props) => {
                 </Col>
             </Row>
             <Row>
+                <br/>
                 <Col>
                     <button type="submit">Submit</button>
                 </Col><br/>

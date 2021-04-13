@@ -12,7 +12,7 @@ const userListing = (props) => {
             <Row>
                 <Col>
                     USERS LIST
-                </Col>
+                </Col><br/>
             </Row>
             {usersList}
         </Container>

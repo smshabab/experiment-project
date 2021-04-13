@@ -5,7 +5,6 @@ const initialState = {
     isRegistered: false,
     displayDetails: false,
     displayListing: false,
-    userEmail: '',
     userDetailsPayload: {},
     userListingPayload: []
 };
@@ -77,7 +76,6 @@ const rootReducer = (state = initialState, action) => {
                     return{
                         ...state,
                         logged: true,
-                        userEmail: fetctRows[userIndex].email,
                         userDetailsPayload:{
                             firstName: fetctRows[userIndex].firstName,
                             lastName: fetctRows[userIndex].lastName,
