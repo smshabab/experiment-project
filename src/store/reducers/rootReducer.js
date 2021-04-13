@@ -2,7 +2,9 @@ import axios from 'axios';
 
 const initialState = {
     logged: false,
-    isRegistered: false
+    isRegistered: false,
+    displayDetails: false,
+    displayListing: false
 };
 
 
@@ -79,6 +81,20 @@ const rootReducer = (state = initialState, action) => {
             .catch(error=>{
                 console.log("error"+error);
             });
+    }else if(action.type === 'ON_CLICK_DETAILS'){
+        return{
+            ...state,
+            displayDetails: true,
+            displayListing: false
+
+        };
+    }else if(action.type === 'ON_CLICK_LISTING'){
+        return{
+            ...state,
+            displayDetails: false,
+            displayListing: true
+
+        };
     }
     return state;
 };

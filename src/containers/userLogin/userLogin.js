@@ -100,11 +100,6 @@ const userLogin = (props) => {
 };
 
 
-const mapStateToProps = state => {
-    return {
-
-    };
-};
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -112,4 +107,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(userLogin);
+export default connect(null, mapDispatchToProps)(userLogin);

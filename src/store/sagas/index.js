@@ -1,7 +1,7 @@
-import {takeEvery} from 'redux-saga/effects';
+// import {takeEvery} from 'redux-saga/effects';
 import {} from './auth';
 
 
 export function* watchAuth(){
-    console.log("Saga working");
+    yield console.log("Saga working");
 }

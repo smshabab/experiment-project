@@ -1,13 +1,10 @@
 import './App.css';
-import UserLogin from './containers/userLogin/userLogin';
-import UserRegistration from './containers/userRegistration/UserRegistration';
+import Layout from './containers/layout/layout';
 
 function App() {
   return (
     <div className="App">
-      <UserLogin/>
-      <br/><br/><br/><br/>
-      <UserRegistration/>
+      <Layout/>
     </div>
   );
 }
