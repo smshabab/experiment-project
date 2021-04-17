@@ -1,7 +1,8 @@
 import {takeEvery} from 'redux-saga/effects';
-import {} from './auth';
+import {loginSaga} from './auth';
+import * as actionTypes from '../actions/actionTypes';
 
 
 export function* watchAuth(){
-    yield console.log("Saga working");
+    yield takeEvery(actionTypes.AUTH_LOGIN,loginSaga);
 }

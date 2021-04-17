@@ -1,19 +1,15 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Formik } from 'formik';
-import {connect} from 'react-redux';
-import {Redirect, Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Redirect, Link } from 'react-router-dom';
 
 let payload = {};
 
 const userLogin = (props) => {
-    console.log("Re-rendering [Logout]");
-    if(props.logged){
-        console.log("Logged: True");
-        return <Redirect to="/layout"/>;
-    }else{
-        console.log("Logged: False");
-        return(
+    return(
+        <React.Fragment>
+            {(props.logged) ? <Redirect to="/layout"/> : null}
             <Container fluid >
                 <Row>
                     <Col lg={4} className="containerDiv"><p>USER LOGIN</p><br/></Col>
@@ -39,7 +35,6 @@ const userLogin = (props) => {
                         return errors;
                     }}
                     onSubmit={(values, { setSubmitting }) => {
-                        setSubmitting(false);
                         payload = values;
                         if(payload.email !== '' && payload.password !== ''){
                             props.onSubmit(payload);
@@ -95,7 +90,7 @@ const userLogin = (props) => {
                         <Row>
                             <br/>
                             <Col>
-                                <button type="submit" disabled={isSubmitting}>Submit</button>
+                                <button type="submit" >Submit</button>
                             </Col><br/>
                         </Row>
                         <Row>
@@ -108,8 +103,9 @@ const userLogin = (props) => {
                     )}
                 </Formik>
             </Container>
-        );
-    }
+        </React.Fragment>
+    );
+    
 };
 
 const mapStateToProps = state => {

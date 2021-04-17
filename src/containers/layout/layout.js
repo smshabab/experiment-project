@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import UserDetails from '../userDetails/userDetails';
 import UserListing from '../userListing/userListing';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 const layout = (props) => {
     return(
