@@ -9,7 +9,7 @@ let payload = {};
 const userLogin = (props) => {
     return(
         <React.Fragment>
-            {(props.logged) ? <Redirect to="/layout"/> : null}
+            {(props.isLogged) ? <Redirect to="/layout"/> : null}
             <Container fluid >
                 <Row>
                     <Col lg={4} className="containerDiv"><p>USER LOGIN</p><br/></Col>
@@ -110,7 +110,7 @@ const userLogin = (props) => {
 
 const mapStateToProps = state => {
    return{
-        logged: state.logged
+        isLogged: state.logged
    };
 };
 
