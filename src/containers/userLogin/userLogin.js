@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Formik } from 'formik';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
+import * as actions from '../../store/actions/index';
 
 let payload = {};
 
@@ -37,7 +38,7 @@ const userLogin = (props) => {
                     onSubmit={(values, { setSubmitting }) => {
                         payload = values;
                         if(payload.email !== '' && payload.password !== ''){
-                            props.onSubmit(payload);
+                            props.onSubmit(payload.email, payload.password);
                         }
                     }}
                 >
@@ -116,7 +117,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSubmit: (payload) => dispatch({type:'SUBMIT_ON_LOGIN', payload})
+        onSubmit: (email, password) => dispatch(actions.auth(email, password))
     };
 };
 
