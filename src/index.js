@@ -4,36 +4,30 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import rootReducer from './store/reducers/rootReducer';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
-import thunk from 'redux-thunk';
+import { createStore, applyMiddleware, compose } from 'redux';
 import {Provider} from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import {watchAuth} from './store/sagas/index';
 import {BrowserRouter} from 'react-router-dom';
-import authReducer from './store/reducers/auth';
+
+
+import mySaga from './store/sagas/auth';
 
 const composeEnhancers = process.env.NODE_ENV=== 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 const sagaMiddleware = createSagaMiddleware();
 
-const reducer = combineReducers({
-  root: rootReducer,
-  auth: authReducer
-});
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware)
+);
 
-const store = createStore(reducer, composeEnhancers(
-  applyMiddleware(thunk, sagaMiddleware)
-));
-
-sagaMiddleware.run(watchAuth);
+sagaMiddleware.run(mySaga);
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Provider store={store}>
         <App />
-      </BrowserRouter>
-    </Provider>
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

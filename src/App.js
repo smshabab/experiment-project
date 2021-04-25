@@ -2,7 +2,7 @@ import './App.css';
 import {connect} from 'react-redux';
 import {Route, Switch, withRouter, Redirect} from 'react-router-dom';
 import Layout from './containers/layout/layout';
-import Login from './containers/userLogin/userLogin';
+import Login from './containers/userLogin/UserLogin';
 import Registration from './containers/userRegistration/UserRegistration';
 
 
@@ -40,3 +40,4 @@ const mapStateToProps = state => {
 };
 
 export default withRouter(connect(mapStateToProps)(App));
+

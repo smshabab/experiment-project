@@ -1,16 +1,22 @@
-import React from 'react';
+import React,{Component} from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Formik } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
-import * as actions from '../../store/actions/index';
+import {useSelector, useDispatch} from 'react-redux';
+import * as actions from '../../store/actions/auth';
 
 let payload = {};
 
-const userLogin = (props) => {
+const UserLogin = (props) => {
+
+    const dispatch = useDispatch();
+
+    const logged = useSelector((state) => {return state.logged});
+   
     return(
-        <React.Fragment>
-            {(props.isLogged) ? <Redirect to="/layout"/> : null}
+        <div>
+            {(logged) ? <Redirect to="/layout"/> : null}
             <Container fluid >
                 <Row>
                     <Col lg={4} className="containerDiv"><p>USER LOGIN</p><br/></Col>
@@ -35,39 +41,24 @@ const userLogin = (props) => {
 
                         return errors;
                     }}
-                    onSubmit={(values, { setSubmitting }) => {
-                        payload = values;
-                        if(payload.email !== '' && payload.password !== ''){
-                            props.onSubmit(payload.email, payload.password);
-                        }
+                    onSubmit={async (values, { setSubmitting }) => {
+                        dispatch(actions.onLogin(values.email, values.password));
                     }}
                 >
                     {({
-                    values,
-                    errors,
-                    touched,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
                     isSubmitting,
                     /* and other goodies */
                     }) => (
-                    <form onSubmit={handleSubmit}>
+                    <Form>
                         <Row>
                             <Col lg={4}>
                                 <label htmlFor="email">Email</label>
                             </Col>
                             <Col lg={4}>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.email}
-                                />
+                            <Field type="email" name="email" />
                             </Col>
                             <Col lg={4}>
-                                {errors.email && touched.email && errors.email}
+                            <ErrorMessage name="email" component="div" />
                             </Col>
                             
                         </Row>
@@ -76,22 +67,16 @@ const userLogin = (props) => {
                                 <label htmlFor="passeord">Password</label>
                             </Col>
                             <Col>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.password}
-                                />
+                            <Field type="password" name="password" />
                             </Col>
                             <Col>
-                                {errors.password && touched.password && errors.password}
+                            <ErrorMessage name="password" component="div" />
                             </Col>
                         </Row>
                         <Row>
                             <br/>
                             <Col>
-                                <button type="submit" >Submit</button>
+                                <button type="submit" disabled={isSubmitting}>Submit</button>
                             </Col><br/>
                         </Row>
                         <Row>
@@ -100,25 +85,14 @@ const userLogin = (props) => {
                             </Col>
                         </Row>
                         
-                    </form>
+                        </Form>
                     )}
                 </Formik>
             </Container>
-        </React.Fragment>
+        </div>
     );
     
 };
 
-const mapStateToProps = state => {
-   return{
-        isLogged: state.logged
-   };
-};
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onSubmit: (email, password) => dispatch(actions.auth(email, password))
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(userLogin);
+export default UserLogin;

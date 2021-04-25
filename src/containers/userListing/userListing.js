@@ -1,12 +1,27 @@
-import React from 'react';
+import { render } from '@testing-library/react';
+import React, { useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import {connect} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
+import * as Actions from '../../store/actions/auth';
+import {userSelector, useDispatch} from 'react-redux';
+import { v4 as uuid_v4 } from "uuid";
 
-const userListing = (props) => {
-    let usersList;
-    for(let i=0; i<props.ulp.length; i++){
-        usersList+= <Row><Col>{props.ulp[i].email}</Col></Row>;
-    }
+const UserListing = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = () => {dispatch({type: "FETCH_DATA"});}
+
+    const data = useSelector((state)=> {
+        return state.userListingPayload;
+    });
+
+
+    const userlist = Object.keys(data).map((key) => (<Row key={uuid_v4()}><Col>{data[key].email}</Col></Row>));
+   
     return(
         <Container>
             <Row>
@@ -14,15 +29,12 @@ const userListing = (props) => {
                     USERS LIST
                 </Col><br/>
             </Row>
-            {usersList}
+            {userlist}
         </Container>
     );
+   
 };
 
-const mapStateToProps = state => {
-    return{
-        ulp : state.userListingPayload
-    };
-};
 
-export default connect(mapStateToProps)(userListing);
+
+export default UserListing;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import UserDetails from '../userDetails/userDetails';
-import UserListing from '../userListing/userListing';
+import UserListing from '../userListing/UserListing';
 import { connect } from 'react-redux';
 
 const layout = (props) => {
@@ -16,8 +16,8 @@ const layout = (props) => {
             </Row>
             <Row>
                 <Col>
-                    {(props.disDetails) ? <UserDetails/> : null}
-                    {(props.disListing) ? <UserListing/> : null}
+                {(props.disDetails) ? <UserDetails/> : null}
+                {(props.disListing) ? <UserListing/> : null}
                 </Col>
             </Row>
         </Container>
