@@ -10,7 +10,7 @@ const authUserAsync = async () => {
 function* authUser({ payload }) {
     const {email, password} = yield payload;
 
-    const {response, error} = yield call(authUserAsync);
+    const {response} = yield call(authUserAsync);
 
     yield console.log(response);
 

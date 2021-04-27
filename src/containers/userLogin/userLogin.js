@@ -1,12 +1,9 @@
-import React,{Component} from 'react';
+import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import * as actions from '../../store/actions/auth';
-
-let payload = {};
 
 const UserLogin = (props) => {
 
