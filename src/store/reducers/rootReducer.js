@@ -13,8 +13,6 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
 
     switch(action.type) {
-        case actionTypes.AUTH_LOGIN:
-            return {...state, logged: !state.logged}
         case actionTypes.SET_USER:
             return {...state, userDetailsPayload: action.userDetailsPayload, logged: true}
         case actionTypes.SET_DATA:
