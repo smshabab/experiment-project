@@ -32,6 +32,11 @@ const rootReducer = (state = initialState, action) => {
                 displayDetails: false,
                 displayListing: true
             }
+        case 'ON_CLICK_LOGOUT':
+            return{
+                ...state,
+                logged: false
+            }
         default:
             return state;
     }
