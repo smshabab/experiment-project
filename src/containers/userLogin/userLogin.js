@@ -5,7 +5,7 @@ import { Redirect, Link } from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import * as actions from '../../store/actions/auth';
 
-const UserLogin = (props) => {
+const UserLogin = () => {
 
     const dispatch = useDispatch();
 
