@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import { Container, Row, Col } from 'react-bootstrap';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
  
 
 const validate = values => {
@@ -56,7 +56,9 @@ const UserRegistration = (props) => {
     });
  
    return (
+   
     <Container>
+        {(props.isReg) ? <Redirect to="/login"/> : null}   
         <form onSubmit={formik.handleSubmit}>
             <Row>
                 <Col>
