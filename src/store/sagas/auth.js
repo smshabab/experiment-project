@@ -4,7 +4,9 @@ import * as actions from '../actions/auth';
 
 
 const authUserAsync = async () => {
-    return axios.get('https://dummy-data-99218-default-rtdb.firebaseio.com/user-info.json').then((response) => ({ response })).catch((error) => ({error}));
+    return axios.get('https://dummy-data-99218-default-rtdb.firebaseio.com/user-info.json')
+            .then((response) => ({ response }))
+            .catch((error) => ({error}));        
 }
 
 function* authUser({ payload }) {
