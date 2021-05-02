@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Redirect, Link } from 'react-router-dom';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../store/actions/auth';
 
 const UserLogin = () => {
@@ -10,6 +10,10 @@ const UserLogin = () => {
     const dispatch = useDispatch();
 
     const logged = useSelector((state) => {return state.logged});
+
+    const changeState = () => {
+        dispatch(actions.changeStateIsRegistered());
+    };
    
     return(
         <div>
@@ -78,7 +82,7 @@ const UserLogin = () => {
                         </Row>
                         <Row>
                             <Col>
-                                <Link to="/registration">Don't have a account?</Link>
+                                <Link to="/registration" onClick={changeState}>Don't have a account?</Link>
                             </Col>
                         </Row>
                         

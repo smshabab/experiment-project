@@ -5,9 +5,15 @@ import * as actions from '../actions/auth';
 
 const authUserAsync = async () => {
     return axios.get('https://dummy-data-99218-default-rtdb.firebaseio.com/user-info.json')
-            .then((response) => ({ response }))
-            .catch((error) => ({error}));        
+        .then((response) => ({ response }))
+        .catch((error) => ({error}));        
 }
+
+const uploadUserAsync = async (payload) => {
+    axios.post('https://dummy-data-99218-default-rtdb.firebaseio.com/user-info.json', payload)
+        .then(response=>({response}))
+        .catch(error=>({error}));
+};
 
 function* authUser({ payload }) {
     const {email, password} = yield payload;
@@ -48,6 +54,10 @@ function* authUser({ payload }) {
     }
 }
 
+function* uploadUser({payload}){
+    yield call(uploadUserAsync, payload);
+}
+
 
 function* fetchData(action) {
     const {response, error} = yield call(authUserAsync);
@@ -60,9 +70,11 @@ function* fetchData(action) {
     }
 }
 
+
 function* mySaga() {
-    yield takeLatest("AUTH_USER", authUser)
-    yield takeLatest("FETCH_DATA", fetchData)
+    yield takeLatest("AUTH_USER", authUser);
+    yield takeLatest("FETCH_DATA", fetchData);
+    yield takeLatest("SUBMIT_ON_REGISTRATION", uploadUser);
 }
 
 export default mySaga;

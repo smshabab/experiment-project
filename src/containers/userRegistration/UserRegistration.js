@@ -1,9 +1,9 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { Container, Row, Col } from 'react-bootstrap';
-import {connect} from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
- 
+import { useSelector, useDispatch } from 'react-redux';
+import * as actions from '../../store/actions/auth';
 
 const validate = values => {
     
@@ -38,6 +38,10 @@ const validate = values => {
 let payload = {};
  
 const UserRegistration = (props) => {
+
+    const dispatch = useDispatch();
+
+    const isReg = useSelector((state) => {return state.isRegistered});
     
     const formik = useFormik({
         initialValues: {
@@ -48,9 +52,8 @@ const UserRegistration = (props) => {
         },
         validate,
         onSubmit: values => {
-            payload = values;
             if(payload.firstName !== '' && payload.lastName !== '' && payload.email !== '' && payload.password !== ''){
-                props.onSubmit(payload);
+                dispatch(actions.uploadUser(values));
             }
         },
     });
@@ -58,7 +61,7 @@ const UserRegistration = (props) => {
    return (
    
     <Container>
-        {(props.isReg) ? <Redirect to="/login"/> : null}   
+        {(isReg) ? <Redirect to="/login"/> : null}   
         <form onSubmit={formik.handleSubmit}>
             <Row>
                 <Col>
@@ -153,17 +156,4 @@ const UserRegistration = (props) => {
 
 
 
- const mapStateToProps = state => {
-    return {
-        isReg: state.isRegistered
-    };
- };
-
- const mapDispatchToProps = dispatch => {
-    return {
-        onSubmit: (payload) => dispatch({type:'SUBMIT_ON_REGISTRATION', payload})
-    };
-};
-
-
- export default connect(mapStateToProps, mapDispatchToProps)(UserRegistration);
+export default UserRegistration;

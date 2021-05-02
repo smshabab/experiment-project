@@ -1,5 +1,4 @@
 import * as actionTypes from '../actions/actionTypes';
-import axios from 'axios';
 
 const initialState = {
     logged: false,
@@ -15,9 +14,16 @@ const rootReducer = (state = initialState, action) => {
 
     switch(action.type) {
         case actionTypes.SET_USER:
-            return {...state, userDetailsPayload: action.userDetailsPayload, logged: true}
+            return {
+                ...state, 
+                userDetailsPayload: action.userDetailsPayload, 
+                logged: true
+            }
         case actionTypes.SET_DATA:
-            return {...state, userListingPayload: action.userListingPayload}
+            return {
+                ...state,
+                userListingPayload: action.userListingPayload
+            }
         case 'ON_CLICK_DETAILS':
             return{
                 ...state,
@@ -35,18 +41,15 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 logged: false
             }
-        case 'SUBMIT_ON_REGISTRATION':
-            axios.post('https://dummy-data-99218-default-rtdb.firebaseio.com/user-info.json', action.payload)
-            .then(response=>{
-               console.log('data uploaded successfully');
-                
-            })
-            .catch(error=>{
-               
-            });
+        case actionTypes.SUBMIT_ON_REGISTRATION:
             return{
                 ...state,
                 isRegistered: true
+            }
+        case actionTypes.CHANGE_STATE_IS_REGISTERED:
+            return{
+                ...state,
+                isRegistered: false
             }
         default:
             return state;
