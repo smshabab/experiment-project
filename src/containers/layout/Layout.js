@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import UserDetails from '../userDetails/userDetails';
+import UserDetails from '../userDetails/UserDetails';
 import UserListing from '../userListing/UserListing';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
