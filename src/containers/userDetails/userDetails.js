@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import {connect} from 'react-redux';
 
-const userDetails = (props) => {
+const UserDetails = (props) => {
     return(
         <Container>
             <Row>
@@ -55,4 +55,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(userDetails);
+export default connect(mapStateToProps)(UserDetails);

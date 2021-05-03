@@ -5,7 +5,7 @@ import UserListing from '../userListing/UserListing';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-const layout = (props) => {
+const Layout = (props) => {
     return(
         <Container>
             {(props.logged) ? <Redirect to="/layout"/> : null}
@@ -46,4 +46,4 @@ const mapDispatchToProps = dispatch => {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(layout);
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);
