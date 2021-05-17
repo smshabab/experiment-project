@@ -4,13 +4,13 @@ import * as actions from '../actions/auth';
 
 
 const authUserAsync = async () => {
-    return axios.get('https://dummy-data-99218-default-rtdb.firebaseio.com/user-info.json')
+    return axios.get('https://localhost:5001/api/TodoItems')
         .then((response) => ({ response }))
         .catch((error) => ({error}));        
 }
 
 const uploadUserAsync = async (payload) => {
-    axios.post('https://dummy-data-99218-default-rtdb.firebaseio.com/user-info.json', payload)
+    axios.post('https://localhost:5001/api/TodoItems', payload)
         .then(response=>({response}))
         .catch(error=>({error}));
 };
@@ -34,7 +34,6 @@ function* authUser({ payload }) {
                 })
             }
         for(let i=0; i<fetctRows.length; i++){
-            console.log();
             if(fetctRows[i].email === email && fetctRows[i].password === password){
                 varifyUser = true;
                 userIndex = i;
@@ -42,7 +41,9 @@ function* authUser({ payload }) {
                     firstName: fetctRows[userIndex].firstName,
                     lastName: fetctRows[userIndex].lastName,
                     email: fetctRows[userIndex].email,
-                    password: fetctRows[userIndex].password
+                    password: fetctRows[userIndex].password,
+                    phone: fetctRows[userIndex].phone,
+                    address: fetctRows[userIndex].address
                 }
             }
         }
@@ -50,6 +51,8 @@ function* authUser({ payload }) {
         if(varifyUser)
         {
             yield put(actions.setUser(userDetailsPayload))
+        }else{
+            console.log("Validity : False");
         }
     }
 }

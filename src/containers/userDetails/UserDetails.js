@@ -4,45 +4,39 @@ import {connect} from 'react-redux';
 
 const UserDetails = (props) => {
     return(
-        <Container>
-            <Row>
-                <Col>
-                    USER DETAILS
-                </Col><br/>
-            </Row>
-            <Row>
-                <Col>
-                    First Name
-                </Col>
-                <Col>
-                    {props.firstName}
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    Last Name
-                </Col>
-                <Col>
-                    {props.lastName}
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    Email
-                </Col>
-                <Col>
-                    {props.email}
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    Password
-                </Col>
-                <Col>
-                    {props.password}
-                </Col>
-            </Row>
-        </Container>
+        <div align="center">
+            
+            <table border="1" cellSpacing="0">
+                <tr>
+                    <th colSpan="2">USER DETAILS</th>
+                </tr>
+                <tr>
+                    <td>First Name</td>
+                    <td>{props.firstName}</td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td>{props.lastName}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{props.email}</td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>{props.password}</td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td>{props.phone}</td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>{props.address}</td>
+                </tr>
+            </table>
+                   
+        </div>
     );
 };
 
@@ -51,7 +45,9 @@ const mapStateToProps = state => {
         firstName: state.userDetailsPayload.firstName,
         lastName: state.userDetailsPayload.lastName,
         email: state.userDetailsPayload.email,
-        password: state.userDetailsPayload.password
+        password: state.userDetailsPayload.password,
+        phone: state.userDetailsPayload.phone,
+        address: state.userDetailsPayload.address
     };
 };
 

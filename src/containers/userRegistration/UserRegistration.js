@@ -35,7 +35,6 @@ const validate = values => {
     return errors;
 };
 
-let payload = {};
  
 const UserRegistration = (props) => {
 
@@ -52,8 +51,15 @@ const UserRegistration = (props) => {
         },
         validate,
         onSubmit: values => {
-            if(payload.firstName !== '' && payload.lastName !== '' && payload.email !== '' && payload.password !== ''){
-                dispatch(actions.uploadUser(values));
+            if(values.firstName !== '' && values.lastName !== '' && values.email !== '' && values.password !== ''){
+                dispatch(actions.uploadUser({
+                    firstName: values.firstName,
+                    lastName: values.lastName,
+                    email: values.email,
+                    password: values.password,
+                    phone: "",
+                    address: ""
+                }));
             }
         },
     });

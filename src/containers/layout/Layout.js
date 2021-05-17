@@ -14,7 +14,7 @@ const Layout = (props) => {
             </Row>
             <Row>
                 <Col><Button onClick={props.logout}>Logout</Button></Col><br/>
-                {(props.disListing) ? <Col><Button onClick={props.displayDetails}>My Details</Button></Col> : <Col><Button onClick={props.displayAllUsers}>All Users</Button></Col>}
+                <Col><Button onClick={props.displayAllUsers}>All Users</Button><Button onClick={props.displayDetails}>My Details</Button><Button>Edit Details</Button></Col>
                 <br/>
                 
             </Row>
