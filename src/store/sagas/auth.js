@@ -15,6 +15,13 @@ const uploadUserAsync = async (payload) => {
         .catch(error=>({error}));
 };
 
+const updateUserAsync = async (payload) => {
+    console.log("id : "+payload.id);
+    axios.put('https://localhost:5001/api/TodoItems/'+payload.id, payload)
+        .then(response=>({response}))
+        .catch(error=>({error}));
+};
+
 function* authUser({ payload }) {
     const {email, password} = yield payload;
 
@@ -38,6 +45,7 @@ function* authUser({ payload }) {
                 varifyUser = true;
                 userIndex = i;
                 userDetailsPayload = {
+                    id: fetctRows[userIndex].id,
                     firstName: fetctRows[userIndex].firstName,
                     lastName: fetctRows[userIndex].lastName,
                     email: fetctRows[userIndex].email,
@@ -47,9 +55,9 @@ function* authUser({ payload }) {
                 }
             }
         }
+        console.log(userDetailsPayload);
 
-        if(varifyUser)
-        {
+        if(varifyUser){
             yield put(actions.setUser(userDetailsPayload))
         }else{
             console.log("Validity : False");
@@ -59,6 +67,10 @@ function* authUser({ payload }) {
 
 function* uploadUser({payload}){
     yield call(uploadUserAsync, payload);
+}
+
+function* updateUserDetails(payload){
+    yield call(updateUserAsync, payload);
 }
 
 
@@ -78,6 +90,7 @@ function* mySaga() {
     yield takeLatest("AUTH_USER", authUser);
     yield takeLatest("FETCH_DATA", fetchData);
     yield takeLatest("SUBMIT_ON_REGISTRATION", uploadUser);
+    yield takeLatest("UPDATE_USER_DETAILS", updateUserDetails);
 }
 
 export default mySaga;

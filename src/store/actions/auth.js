@@ -28,6 +28,13 @@ export const uploadUser = (payload) => {
     };
 };
 
+export const updateUserDetails = (payload) => {
+    return { 
+        type: actionTypes.UPDATE_USER_DETAILS, 
+        payload
+    };
+};
+
 export const changeStateIsRegistered = () => {
     return {
         type: actionTypes.CHANGE_STATE_IS_REGISTERED

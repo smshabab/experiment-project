@@ -1,7 +1,11 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import {connect} from 'react-redux';
+import { useDispatch } from 'react-redux';
+import * as actions from '../../store/actions/auth';
 
-const UserDetails = (props) => {
+const EditUserDetails = (props) => {
+    const dispatch = useDispatch();
     return(
         <div align="center">
             
@@ -27,11 +31,23 @@ const UserDetails = (props) => {
                 </tr>
                 <tr>
                     <td>Phone</td>
-                    <td>{props.phone}</td>
+                    <td><input type="text" id="phone" defaultValue={props.phone} size="45" /></td>
                 </tr>
                 <tr>
                     <td>Address</td>
-                    <td>{props.address}</td>
+                    <td><input type="text" id="address" defaultValue={props.address} size="45" /></td>
+                </tr>
+                <tr>
+                    <td align="center" colSpan="2">
+                        <Button onClick={()=>dispatch(actions.updateUserDetails({
+                            id: props.id,
+                            firstName: props.firstName,
+                            lastName: props.lastName,
+                            email: props.email,
+                            password: props.password,
+                            phone: document.getElementById('phone').value, 
+                            address: document.getElementById('address').value}))} >Update</Button>
+                    </td>
                 </tr>
             </table>
                    
@@ -41,6 +57,7 @@ const UserDetails = (props) => {
 
 const mapStateToProps = state => {
     return{
+        id: state.userDetailsPayload.id,
         firstName: state.userDetailsPayload.firstName,
         lastName: state.userDetailsPayload.lastName,
         email: state.userDetailsPayload.email,
@@ -50,4 +67,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(UserDetails);
+export default connect(mapStateToProps)(EditUserDetails);

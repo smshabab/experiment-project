@@ -5,6 +5,7 @@ const initialState = {
     isRegistered: false,
     displayDetails: false,
     displayListing: false,
+    displayEditDetails: false,
     userDetailsPayload: {},
     userListingPayload: []
 };
@@ -28,13 +29,22 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 displayDetails: true,
-                displayListing: false
+                displayListing: false,
+                displayEditDetails: false
+            }
+        case 'ON_CLICK_EDIT_DETAILS':
+            return{
+                ...state,
+                displayDetails: false,
+                displayListing: false,
+                displayEditDetails: true
             }
         case 'ON_CLICK_LISTING':
             return{
                 ...state,
                 displayDetails: false,
-                displayListing: true
+                displayListing: true,
+                displayEditDetails: false
             }
         case 'ON_CLICK_LOGOUT':
             return{
@@ -50,6 +60,13 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 isRegistered: false
+            }
+        case actionTypes.UPDATE_USER_DETAILS:
+            return{
+                ...state,
+                displayDetails: true,
+                displayListing: false,
+                displayEditDetails: false
             }
         default:
             return state;

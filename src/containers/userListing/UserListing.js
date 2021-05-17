@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuid_v4 } from "uuid";
 
@@ -16,17 +15,15 @@ const UserListing = () => {
         return state.userListingPayload;
     });
 
-    const userlist = Object.keys(data).map((key) => (<Row key={uuid_v4()}><Col>{data[key].email}</Col></Row>));
+    const userlist = Object.keys(data).map((key) => (<tr key={uuid_v4()}><td>{data[key].email}</td></tr>));
    
     return(
-        <Container>
-            <Row>
-                <Col>
-                    USERS LIST
-                </Col><br/>
-            </Row>
-            {userlist}
-        </Container>
+        <div>
+            <table align="center" border="1" cellSpacing="0">
+                <tr><th>USERS LIST</th></tr>
+                {userlist}
+            </table>
+        </div>
     );
    
 };
